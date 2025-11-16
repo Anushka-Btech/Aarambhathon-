@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>LocalLink — Luxury Heritage Travel (Pro)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brand">
+        <img
+          src="C:\Users\pc om\OneDrive\Aarambhathon\Frontend\assets\2.png"
+          alt="LocalLink"
+          class="logo-img"
+        />
+        <div class="brand-text">
+          <h1>LocalLink</h1>
+          <p class="tag">Luxury • Heritage • Local Guides</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="loginBtn" class="btn ghost">Login</button>
+        <button id="signupBtn" class="btn outline">Sign up</button>
+      </div>
+    </header>
+
+    <!-- HERO / SEARCH -->
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Plan an unforgettable heritage day — curated, local, luxurious.</h2>
+        <p class="lead">
+          Type a city (Jaipur, Udaipur, Varanasi, Agra, Khajuraho) and explore
+          guides & itineraries.
+        </p>
+
+        <div class="search-row">
+          <input id="cityInput" placeholder="Search city e.g., Jaipur" />
+          <select id="daysSelect" title="Days">
+            <option value="1">1 day</option>
+            <option value="2">2 days</option>
+            <option value="3">3 days</option>
+          </select>
+          <button id="searchBtn" class="btn primary">Explore</button>
+        </div>
+
+        <div class="quick">
+          <span>✔ Curated attractions</span>
+          <span>✔ Verified guides</span>
+          <span>✔ Multi-day plans</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card-visual">
+          <img
+            src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=60"
+            alt="heritage"
+          />
+          <div class="figure-gold">Heritage Journeys</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <main class="container">
+      <section class="left-col">
+        <div id="attractions" class="block">
+          <h3>Top Attractions</h3>
+          <div id="attractionList" class="grid"></div>
+        </div>
+
+        <div id="guides" class="block">
+          <h3>Local Guides <small id="guideCount"></small></h3>
+          <div id="guideList" class="grid"></div>
+          <div class="loadbar">
+            <button id="loadMoreGuides" class="btn ghost">
+              Load more guides
+            </button>
+          </div>
+        </div>
+
+        <div id="estimator" class="block">
+          <h3>Price Estimator</h3>
+          <div class="est-row">
+            <label
+              >Pick guide price (₹):
+              <input id="estPrice" type="number" value="1200" min="100"
+            /></label>
+            <label
+              >Days: <input id="estDays" type="number" value="1" min="1"
+            /></label>
+            <button id="calcBtn" class="btn primary">Estimate</button>
+          </div>
+          <div id="estResult" class="muted">Quick cost will show here.</div>
+        </div>
+      </section>
+
+      <aside class="right-col">
+        <div id="itinerary" class="panel">
+          <h3>Suggested Itinerary</h3>
+          <div id="itineraryContent" class="muted">
+            Search a city to load curated plans.
+          </div>
+          <div id="multiDayControls" class="muted small"></div>
+        </div>
+
+        <div id="mapPanel" class="panel">
+          <h3>Map (animated)</h3>
+          <div id="mapWrap" class="mapWrap">
+            <iframe
+              id="mapFrame"
+              src=""
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            ></iframe>
+          </div>
+        </div>
+
+        <div id="bookingPanel" class="panel">
+          <h3>Booking / Quick Contact</h3>
+          <select id="quickGuideSelect">
+            <option value="">Select guide (or click on card)</option>
+          </select>
+          <input id="touristName" placeholder="Your name" />
+          <input id="touristContact" placeholder="Phone or email" />
+          <input id="tourDate" type="date" />
+          <textarea
+            id="tourNotes"
+            placeholder="Preferences (optional)"
+          ></textarea>
+          <div class="actions">
+            <button id="bookBtn" class="btn primary">Request Guide</button>
+            <button id="saveLocalBtn" class="btn ghost">Save Offline</button>
+          </div>
+          <p id="bookMsg" class="muted small"></p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Floating WhatsApp -->
+    <a
+      id="whatsappBtn"
+      class="whatsapp-btn"
+      href="https://wa.me/91XXXXXXXXXX"
+      target="_blank"
+      title="Chat on WhatsApp"
+    >
+      <img
+        src="C:\Users\pc om\OneDrive\Aarambhathon\Frontend\assets\sm_5b321c99945a2.png"
+        alt="WhatsApp"
+        class="whatsapp-icon"
+      />
+    </a>
+
+    <!-- BOOKING POPUP (animated) -->
+    <div id="popup" class="popup hidden">
+      <div class="popup-card">
+        <h4 id="popupTitle">Request Guide</h4>
+        <p id="popupText">Fill quick details to request a guide.</p>
+        <div class="actions">
+          <button id="popupConfirm" class="btn primary">Confirm</button>
+          <button id="popupCancel" class="btn ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="modal" class="modal hidden">
+      <div class="modal-card fancy-modal">
+        <button class="modal-close" id="modalClose">&times;</button>
+
+        <div class="modal-header">
+          <h2 id="modalTitle">Login</h2>
+          <p id="modalSubtitle">
+            Welcome back! Let's explore heritage together.
+          </p>
+        </div>
+
+        <div class="modal-body">
+          <input id="email" type="email" placeholder="Email" />
+          <input id="password" type="password" placeholder="Password" />
+          <button class="btn primary fancy-btn" id="modalActionBtn">
+            Continue
+          </button>
+
+          <p class="switch">
+            Don’t have an account? <span id="switchToSignup">Sign up</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
